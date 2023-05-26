@@ -1,0 +1,100 @@
+.dark-mode {
+  background-color: #202020;
+  color: #fff;
+}
+
+.dark-mode input[type="text"],
+.dark-mode input[type="number"],
+.dark-mode select {
+  background-color: #363636;
+  color: #fff;
+}
+
+.dark-mode th,
+.dark-mode td {
+  color: #fff;
+}
+
+.theme-switch {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 9999;
+}
+
+.theme-switch-label {
+  display: inline-block;
+  width: 40px;
+  height: 22px;
+  background-color: #ddd;
+  border-radius: 20px;
+  position: relative;
+  cursor: pointer;
+}
+
+.theme-switch-label .theme-switch-slider {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: 0.2s;
+}
+
+.theme-switch-input {
+  display: none;
+}
+
+.theme-switch-input:checked + .theme-switch-slider {
+  transform: translateX(18px);
+}
+
+.theme-switch-label:before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  background-color: transparent;
+  border-radius: 50%;
+  transition: 0.2s;
+}
+
+.theme-switch-label .theme-switch-slider:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 12px;
+  color: #000;
+}
+
+.theme-switch-label .theme-switch-slider:before {
+  content: "\f186";
+}
+
+.theme-switch-input:checked + .theme-switch-slider:before {
+  content: "\f185";
+}
+
+.dark-mode .theme-switch-label .theme-switch-slider:before {
+  content: "\f186";
+}
+
+.dark-mode .theme-switch-input:checked + .theme-switch-slider:before {
+  content: "\f186";
+}
+#courseCount {
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.swal-edit {
+  display: block !important;
+}
