@@ -68,7 +68,7 @@ $(document).ready(function () {
     }).then((result) => {
       if (result.isConfirmed) {
         const textarea = document.createElement("textarea");
-        textarea.value = gpa;
+        textarea.value = gpa.toFixed(2);
         document.body.appendChild(textarea);
         textarea.select();
         document.execCommand("copy");

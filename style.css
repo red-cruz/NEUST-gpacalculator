@@ -1,12 +1,12 @@
 .dark-mode {
-  background-color: #202020;
+  background-color: rgb(36, 35, 49);
   color: #fff;
 }
 
 .dark-mode input[type="text"],
 .dark-mode input[type="number"],
 .dark-mode select {
-  background-color: #363636;
+  background-color: rgb(83, 62, 45);
   color: #fff;
 }
 
@@ -26,7 +26,7 @@
   display: inline-block;
   width: 40px;
   height: 22px;
-  background-color: #ddd;
+  background-color: rgb(162, 112, 53);
   border-radius: 20px;
   position: relative;
   cursor: pointer;
@@ -38,7 +38,7 @@
   left: 2px;
   width: 18px;
   height: 18px;
-  background-color: #fff;
+  background-color: rgb(184, 139, 74);
   border-radius: 50%;
   transition: 0.2s;
 }
@@ -90,6 +90,7 @@
 .dark-mode .theme-switch-input:checked + .theme-switch-slider:before {
   content: "\f186";
 }
+
 #courseCount {
   margin-left: 10px;
   font-size: 14px;
