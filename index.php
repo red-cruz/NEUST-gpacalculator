@@ -1,3 +1,11 @@
+<?php
+  $version = '1.0.0';
+  $cssFile = 'style.css';
+  $jsFile = 'script.js';
+
+  $cssUrl = $cssFile . '?v=' . $version;
+  $jsUrl = $jsFile . '?v=' . $version;
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -23,7 +31,7 @@
     />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="<?=$cssUrl?>" />
   </head>
 
   <body class="dark-mode">
@@ -112,6 +120,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Custom JavaScript -->
-    <script src="index.js"></script>
+    <script src="<?=$jsUrl?>"></script>
   </body>
 </html>
