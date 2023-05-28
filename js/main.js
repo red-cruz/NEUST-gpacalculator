@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
+import "@fortawesome/fontawesome-free/css/all.css";
 import $ from "jquery";
 import Swal from "sweetalert2";
 import updateCourseTable from "./course";
@@ -9,6 +10,27 @@ import calculateGPA from "./gpa";
 export let courses = [];
 
 $(function () {
+  // Theme switch
+  $("#theme-switch-toggle").on("change", function () {
+    const label = $('label[for="theme-switch-toggle"]');
+    const checked = $(this).prop("checked");
+    if (checked) {
+      label.css("padding", "0.375rem 0.65rem");
+      label.removeClass("btn-dark");
+      label.addClass("btn-light bg-body-secondary");
+      label.children("i").removeClass("fa-moon");
+      label.children("i").addClass("fa-sun");
+      $("body").attr("data-bs-theme", "light");
+    } else {
+      label.css("padding", "0.375rem 0.75rem");
+      label.removeClass("btn-light bg-body-secondary");
+      label.addClass("btn-dark");
+      label.children("i").removeClass("fa-sun");
+      label.children("i").addClass("fa-moon");
+      $("body").attr("data-bs-theme", "dark");
+    }
+  });
+
   // Initial update of the course table
   updateCourseTable();
 
@@ -24,7 +46,7 @@ $(function () {
         icon: "warning",
         title: "Oops...",
         text: "Please enter grade and units.",
-        timer: 1500,
+        timer: 2500,
       });
       return;
     }

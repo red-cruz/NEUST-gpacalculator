@@ -28,8 +28,8 @@ export default function updateCourseTable() {
           <td>${course.grade}</td>
           <td>${course.units}</td>
           <td>
-            <button type="button" class="btn btn-sm btn-primary editBtn" data-index="${i}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="far fa-edit"></i></button>
-            <button type="button" class="btn btn-sm btn-danger deleteBtn" data-index="${i}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="far fa-trash-alt"></i></button>
+            <button type="button" class="btn bg-body-tertiary text-white editBtn" data-index="${i}" data-toggle="tooltip" data-placement="top" data-bs-theme="dark" title="Edit"><i class="fa-solid fa-pencil"></i></button>
+            <button type="button" class="btn bg-body-tertiary text-danger deleteBtn" data-index="${i}" data-toggle="tooltip" data-placement="top"data-bs-theme="dark" title="Delete"><i class="fa-solid fa-xmark fa-lg"></i></button>
           </td>
         </tr>
       `;

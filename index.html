@@ -7,66 +7,123 @@
     <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/styles.css?v=1.0.0" />
+    <!-- <link rel="stylesheet" href="css/styles.css?v=1.0.0" /> -->
 
     <!-- Minified Script -->
     <script src="dist/main.min.js"></script>
+    <style></style>
   </head>
 
-  <body class="dark-mode">
-    <div class="container">
-      <h1>GPA Calculator</h1>
+  <body data-bs-theme="dark">
+    <header style="height: 100px">
+      <nav class="navbar fixed-top bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img
+              src="img/neust_logo.png"
+              alt="Logo"
+              width="30"
+              height="30"
+              class="d-inline-block align-text-top"
+            />
+            <b style="font-family: Georgia, 'Times New Roman', Times, serif"
+              >GPA Calculator</b
+            >
+          </a>
+          <div class="float-end">
+            <a
+              href="https://github.com/red-cruz"
+              class="btn d-inline rounded-circle"
+              target="_blank"
+              role="button"
+              ><i class="fa-brands fa-github"></i
+            ></a>
+            <div class="d-inline">
+              <input type="checkbox" class="d-none" id="theme-switch-toggle" />
+              <label
+                for="theme-switch-toggle"
+                class="btn btn-dark rounded-circle"
+              >
+                <i class="fa-regular fa-moon"></i>
+              </label>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
 
+    <div class="container">
       <!-- GPA Form -->
       <form id="gpaForm">
-        <div class="form-group">
-          <label for="course">Course Name (Optional)</label>
-          <input
-            type="text"
-            class="form-control"
-            id="course"
-            placeholder="Enter course name"
-            autocomplete="off"
-          />
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="grade">Grade</label>
-            <input
-              type="number"
-              class="form-control"
-              id="grade"
-              placeholder="Enter grade"
-              autocomplete="off"
-              required
-            />
+        <div class="row g-2 mb-3">
+          <!-- Course name -->
+          <div class="col-md">
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="course"
+                placeholder="Enter course name"
+                autocomplete="off"
+              />
+              <label for="course">Course Name (Optional)</label>
+            </div>
           </div>
-          <div class="form-group col-md-6">
-            <label for="units">Units</label>
-            <input
-              type="number"
-              class="form-control"
-              id="units"
-              placeholder="Enter units"
-              autocomplete="off"
-              required
-            />
+          <!-- Grade -->
+          <div class="col-md">
+            <div class="form-floating">
+              <input
+                type="number"
+                class="form-control"
+                id="grade"
+                placeholder="Enter grade"
+                autocomplete="off"
+                required
+                min="1"
+                max="5"
+                step="0.25"
+              />
+              <label for="grade">Grade</label>
+            </div>
+          </div>
+          <!-- Units -->
+          <div class="col-md">
+            <div class="form-floating">
+              <input
+                type="number"
+                class="form-control"
+                id="units"
+                placeholder="Enter units"
+                autocomplete="off"
+                required
+                min="1"
+                max="21"
+              />
+              <label for="grade">Units</label>
+            </div>
           </div>
         </div>
-        <button type="button" class="btn btn-primary" id="addCourseBtn">
-          Add Course
-        </button>
+        <div class="d-grid gap-2 col-12 col-md-4 mx-auto">
+          <button
+            id="addCourseBtn"
+            type="button"
+            class="btn bg-body-tertiary text-white"
+            data-bs-theme="dark"
+          >
+            <i class="fa-solid fa-plus"></i> Add Course
+          </button>
+        </div>
       </form>
 
       <br />
 
       <!-- Course table -->
-      <table class="table table-bordered">
+      <table class="table table-bordered table-hover text-center">
         <thead class="thead-dark">
           <tr>
             <th>
               Course
-              <span id="courseCount" class="badge badge-secondary"></span>
+              <span id="courseCount" class="badge bg-secondary"></span>
             </th>
             <th>Grade</th>
             <th>Units</th>
@@ -76,22 +133,28 @@
         <tbody id="courseTable"></tbody>
       </table>
 
-      <!-- Calculate GPA button -->
-      <button type="button" class="btn btn-primary" id="calculateBtn">
-        Calculate GPA
-      </button>
-    </div>
-
-    <!-- Theme switch -->
-    <div class="theme-switch">
-      <label class="theme-switch-label" for="themeSwitchInput">
-        <input
-          type="checkbox"
-          class="theme-switch-input"
-          id="themeSwitchInput"
-        />
-        <span class="theme-switch-slider"></span>
-      </label>
+      <div class="row g-2 mb-3 d-flex justify-content-center">
+        <!-- Calculate GPA button -->
+        <div class="col-12 col-md-4">
+          <button
+            type="button"
+            class="btn btn-success text-white w-100"
+            id="calculateBtn"
+          >
+            Calculate GPA
+          </button>
+        </div>
+        <!-- Reset courses -->
+        <!-- <div class="col-12 col-md-4">
+          <button
+            type="button"
+            class="btn btn-danger text-white w-100"
+            id="resetBtn"
+          >
+            Reset Courses
+          </button>
+        </div> -->
+      </div>
     </div>
   </body>
 </html>

@@ -18,21 +18,30 @@ export default function calculateGPA() {
     const units = parseFloat(course.units);
     totalGradePoints += grade * units;
   }
-
-  const gpa = totalGradePoints / totalUnits;
+  const decimal = 2;
+  const gpaRaw = totalGradePoints / totalUnits;
+  const gpa = gpaRaw.toFixed(decimal);
   const formula = "Grades * Number of Units / Total Number of Units";
-  const message = "Your GPA is ${gpa.toFixed(2)}.\n\nFormula: ${formula}";
+  const message = `Formula: ${formula}`;
+  let imageUrl;
+
+  if (gpa < 2.0) imageUrl = "img/1.gif";
+  else if (gpa < 3.0) imageUrl = "img/2.gif";
+  else if (gpa < 4.0) imageUrl = "img/3.gif";
+  else if (gpa < 5.0) imageUrl = "img/4.gif";
+  else imageUrl = "img/5.gif";
 
   // Show GPA calculation result and copy to clipboard
   Swal.fire({
-    icon: "success",
-    title: "GPA Calculated",
-    text: message,
+    imageUrl: imageUrl,
+    // icon: "success",
+    title: `Your GPA is ${gpa}`,
+    html: message,
     confirmButtonText: "Copy GPA to Clipboard",
   }).then((result) => {
     if (result.isConfirmed) {
       const textarea = document.createElement("textarea");
-      textarea.value = gpa.toFixed(2);
+      textarea.value = gpa;
       document.body.appendChild(textarea);
       textarea.select();
       document.execCommand("copy");
