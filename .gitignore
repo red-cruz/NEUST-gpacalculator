@@ -1,5 +1,5 @@
 node_modules/
 npm-debug.log
-dist/
 !dist/main.min.js
+dist/
 build/
