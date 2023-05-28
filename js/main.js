@@ -1,87 +1,16 @@
-$(document).ready(function () {
-  // Array to store courses
-  let courses = [];
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/js/bootstrap.js";
+import $ from "jquery";
+import Swal from "sweetalert2";
+import updateCourseTable from "./course";
+import calculateGPA from "./gpa";
 
-  // Function to update the course table
-  function updateCourseTable() {
-    // Update course count
-    $("#courseCount").text(courses.length);
+// Array to store courses
+export let courses = [];
 
-    const courseTable = $("#courseTable");
-    courseTable.empty();
-
-    if (courses.length === 0) {
-      // Display message if no courses added
-      courseTable.html(
-        `<tr><td colspan="4" class="text-center">No courses added.</td></tr>`
-      );
-      $("#calculateBtn").hide();
-    } else {
-      // Iterate through courses and populate the table
-      for (let i = 0; i < courses.length; i++) {
-        const course = courses[i];
-        const row = `
-          <tr>
-            <td>${course.courseName}</td>
-            <td>${course.grade}</td>
-            <td>${course.units}</td>
-            <td>
-              <button type="button" class="btn btn-sm btn-primary editBtn" data-index="${i}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="far fa-edit"></i></button>
-              <button type="button" class="btn btn-sm btn-danger deleteBtn" data-index="${i}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="far fa-trash-alt"></i></button>
-            </td>
-          </tr>
-        `;
-        courseTable.append(row);
-      }
-      $("#calculateBtn").show();
-    }
-  }
-
+$(function () {
   // Initial update of the course table
   updateCourseTable();
-
-  // Function to calculate the GPA
-  function calculateGPA() {
-    const totalUnits = courses.reduce(
-      (sum, course) => sum + parseFloat(course.units),
-      0
-    );
-    let totalGradePoints = 0;
-
-    for (let i = 0; i < courses.length; i++) {
-      const course = courses[i];
-      const grade = parseFloat(course.grade);
-      const units = parseFloat(course.units);
-      totalGradePoints += grade * units;
-    }
-
-    const gpa = totalGradePoints / totalUnits;
-    const formula = "Grades * Number of Units / Total Number of Units";
-    const message = `Your GPA is ${gpa.toFixed(2)}.\n\nFormula: ${formula}`;
-
-    // Show GPA calculation result and copy to clipboard
-    Swal.fire({
-      icon: "success",
-      title: "GPA Calculated",
-      text: message,
-      confirmButtonText: "Copy GPA to Clipboard",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const textarea = document.createElement("textarea");
-        textarea.value = gpa.toFixed(2);
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand("copy");
-        document.body.removeChild(textarea);
-        Swal.fire({
-          icon: "success",
-          title: "GPA copied to Clipboard",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      }
-    });
-  }
 
   // Add course button click event
   $("#addCourseBtn").click(function () {
