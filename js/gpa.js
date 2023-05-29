@@ -1,11 +1,14 @@
-import { courses } from "./main";
+"use strict";
+import { courses } from "./app";
+import updateTable from "./course";
 import Swal from "sweetalert2";
+import "@sweetalert2/theme-dark/dark.css";
 
 /**
  * @description Function to calculate the GPA
  * @author RED
  */
-export default function calculateGPA() {
+export function calculate() {
   const totalUnits = courses.reduce(
     (sum, course) => sum + parseFloat(course.units),
     0
@@ -22,7 +25,7 @@ export default function calculateGPA() {
   const gpaRaw = totalGradePoints / totalUnits;
   const gpa = gpaRaw.toFixed(decimal);
   const formula = "Grades * Number of Units / Total Number of Units";
-  const message = `Formula: ${formula}`;
+  const message = `<i>Formula: ${formula}</i>`;
   let imageUrl;
 
   if (gpa < 2.0) imageUrl = "img/1.gif";
@@ -34,6 +37,7 @@ export default function calculateGPA() {
   // Show GPA calculation result and copy to clipboard
   Swal.fire({
     imageUrl: imageUrl,
+    imageHeight: 200,
     // icon: "success",
     title: `Your GPA is ${gpa}`,
     html: message,
@@ -54,4 +58,10 @@ export default function calculateGPA() {
       });
     }
   });
+}
+
+export function reset() {
+  courses = [];
+  updateTable();
+  return courses;
 }

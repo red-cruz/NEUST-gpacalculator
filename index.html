@@ -10,12 +10,11 @@
     <!-- <link rel="stylesheet" href="css/styles.css?v=1.0.0" /> -->
 
     <!-- Minified Script -->
-    <script src="dist/main.min.js"></script>
-    <style></style>
+    <script src="dist/app.min.js"></script>
   </head>
 
   <body data-bs-theme="dark">
-    <header style="height: 100px">
+    <header style="height: 80px">
       <nav class="navbar fixed-top bg-body-tertiary">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
@@ -54,8 +53,8 @@
 
     <div class="container">
       <!-- GPA Form -->
-      <form id="gpaForm">
-        <div class="row g-2 mb-3">
+      <form id="gpaAddForm" class="needs-validation mb-2" novalidate>
+        <div class="row g-2 mb-2">
           <!-- Course name -->
           <div class="col-md">
             <div class="form-floating">
@@ -70,7 +69,7 @@
             </div>
           </div>
           <!-- Grade -->
-          <div class="col-md">
+          <div class="col-sm">
             <div class="form-floating">
               <input
                 type="number"
@@ -87,7 +86,7 @@
             </div>
           </div>
           <!-- Units -->
-          <div class="col-md">
+          <div class="col-sm">
             <div class="form-floating">
               <input
                 type="number"
@@ -106,8 +105,8 @@
         <div class="d-grid gap-2 col-12 col-md-4 mx-auto">
           <button
             id="addCourseBtn"
-            type="button"
-            class="btn bg-body-tertiary text-white"
+            type="submit"
+            class="btn btn-lg bg-body-tertiary text-white"
             data-bs-theme="dark"
           >
             <i class="fa-solid fa-plus"></i> Add Course
@@ -115,7 +114,7 @@
         </div>
       </form>
 
-      <br />
+      <hr />
 
       <!-- Course table -->
       <table class="table table-bordered table-hover text-center">
@@ -134,27 +133,137 @@
       </table>
 
       <div class="row g-2 mb-3 d-flex justify-content-center">
-        <!-- Calculate GPA button -->
-        <div class="col-12 col-md-4">
+        <!-- Reset courses -->
+        <div class="col-6 col-md-4">
           <button
             type="button"
-            class="btn btn-success text-white w-100"
-            id="calculateBtn"
+            class="btn btn-lg bg-body-tertiary text-danger w-100"
+            id="resetBtn"
+            data-bs-theme="dark"
           >
-            Calculate GPA
+            Reset
           </button>
         </div>
-        <!-- Reset courses -->
-        <!-- <div class="col-12 col-md-4">
+        <!-- Calculate GPA button -->
+        <div class="col-6 col-md-4">
           <button
             type="button"
-            class="btn btn-danger text-white w-100"
-            id="resetBtn"
+            class="btn btn-lg bg-body-tertiary text-white w-100"
+            id="calculateBtn"
+            data-bs-theme="dark"
           >
-            Reset Courses
+            Calculate
           </button>
-        </div> -->
+        </div>
       </div>
     </div>
+    <!-- EDIT MODAL -->
+      <div class="modal fade" id="editCourseModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <form id="gpaUpdateForm" class="needs-validation" novalidate>
+              <div class="modal-header">
+                <h1 class="modal-title fs-5">Edit course</h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div class="row g-2 mb-3">
+                  <!-- Course name -->
+                  <div class="col-md-12">
+                    <div class="form-floating">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="updateCourseName"
+                        placeholder="Enter course name"
+                        autocomplete="off"
+                        autofocus
+                      />
+                      <label for="course">Course Name (Optional)</label>
+                    </div>
+                  </div>
+                  <!-- Grade -->
+                  <div class="col-md">
+                    <div class="form-floating">
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="updateGrade"
+                        placeholder="Enter grade"
+                        autocomplete="off"
+                        required
+                        min="1"
+                        max="5"
+                      />
+                      <label for="grade">Grade</label>
+                    </div>
+                  </div>
+                  <!-- Units -->
+                  <div class="col-md">
+                    <div class="form-floating">
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="updateUnits"
+                        placeholder="Enter units"
+                        autocomplete="off"
+                        required
+                        min="1"
+                        max="21"
+                      />
+                      <label for="grade">Units</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn bg-body-tertiary text-danger"
+                data-bs-theme="dark" data-bs-dismiss="modal">
+                  Close
+                </button>
+                <button type="submit" class="btn bg-body-tertiary text-white"
+                data-bs-theme="dark"><i class="fa-solid fa-check"></i> Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row template -->
+    <table id="courseRowTemplate" class="d-none">
+      <tbody>
+        <tr>
+          <td class="courseName"></td>
+          <td class="courseGrade"></td>
+          <td class="courseUnits"></td>
+          <td>
+            <button
+              type="button"
+              class="editCourse btn bg-body-tertiary text-white"
+              data-bs-toggle="modal" 
+              data-bs-target="#editCourseModal"
+              data-bs-theme="dark"
+              title="Edit"
+            >
+              <i class="editCourse fa-solid fa-pencil"></i>
+            </button>
+            <button
+              type="button"
+              class="removeCourse btn bg-body-tertiary text-danger"
+              data-bs-theme="dark"
+              title="Delete"
+            >
+              <i class="removeCourse fa-solid fa-xmark"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </body>
 </html>
