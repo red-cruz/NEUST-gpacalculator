@@ -91,6 +91,7 @@ export function remove(e) {
  * @author RED
  */
 export default function updateTable() {
+  $("#courseCount").show();
   // Update course count
   $("#courseCount").text(courses.length);
 
@@ -98,6 +99,8 @@ export default function updateTable() {
   courseTable.empty();
 
   if (courses.length === 0) {
+    $("#courseCount").hide();
+
     // Display message if no courses added
     courseTable.html(
       `<tr>

@@ -80,7 +80,7 @@
                 required
                 min="1"
                 max="5"
-                step="0.25"
+                step="0.01"
               />
               <label for="grade">Grade</label>
             </div>
@@ -98,7 +98,7 @@
                 min="1"
                 max="21"
               />
-              <label for="grade">Units</label>
+              <label for="units">Units</label>
             </div>
           </div>
         </div>
@@ -183,8 +183,9 @@
                         placeholder="Enter course name"
                         autocomplete="off"
                         autofocus
+                        required
                       />
-                      <label for="course">Course Name (Optional)</label>
+                      <label for="updateCourseName">Course Name (Optional)</label>
                     </div>
                   </div>
                   <!-- Grade -->
@@ -199,8 +200,9 @@
                         required
                         min="1"
                         max="5"
+                        step="0.01"
                       />
-                      <label for="grade">Grade</label>
+                      <label for="updateGrade">Grade</label>
                     </div>
                   </div>
                   <!-- Units -->
@@ -216,7 +218,7 @@
                         min="1"
                         max="21"
                       />
-                      <label for="grade">Units</label>
+                      <label for="updateUnits">Units</label>
                     </div>
                   </div>
                 </div>
@@ -239,13 +241,13 @@
     <table id="courseRowTemplate" class="d-none">
       <tbody>
         <tr>
-          <td class="courseName"></td>
-          <td class="courseGrade"></td>
-          <td class="courseUnits"></td>
-          <td>
+          <td class="courseName align-middle text-break"></td>
+          <td class="courseGrade align-middle"></td>
+          <td class="courseUnits align-middle"></td>
+          <td class="align-middle">
             <button
               type="button"
-              class="editCourse btn bg-body-tertiary text-white"
+              class="editCourse btn bg-body-tertiary text-white m-1"
               data-bs-toggle="modal" 
               data-bs-target="#editCourseModal"
               data-bs-theme="dark"
@@ -255,7 +257,7 @@
             </button>
             <button
               type="button"
-              class="removeCourse btn bg-body-tertiary text-danger"
+              class="removeCourse btn bg-body-tertiary text-danger m-1"
               data-bs-theme="dark"
               title="Delete"
             >

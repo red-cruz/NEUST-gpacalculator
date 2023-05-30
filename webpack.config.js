@@ -18,7 +18,7 @@ module.exports = {
       },
     ],
   },
-  mode: "production",
+  mode: "development",
   optimization: {
     minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
   },
