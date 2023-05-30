@@ -21,16 +21,15 @@ export function calculate() {
     const units = parseFloat(course.units);
     totalGradePoints += grade * units;
   }
-  const decimal = 2;
   const gpaRaw = totalGradePoints / totalUnits;
-  const gpa = gpaRaw.toFixed(decimal);
+  const gpa = gpaRaw.toFixed(2);
   const formula = "Grades * Number of Units / Total Number of Units";
   const message = `<i>Formula: ${formula}</i>`;
   let imageUrl;
 
   if (gpa < 2.0) imageUrl = "img/1.gif";
   else if (gpa < 3.0) imageUrl = "img/2.gif";
-  else if (gpa < 4.0) imageUrl = "img/3.gif";
+  else if (gpa == 3.0) imageUrl = "img/3.gif";
   else if (gpa < 5.0) imageUrl = "img/4.gif";
   else imageUrl = "img/5.gif";
 
@@ -38,24 +37,12 @@ export function calculate() {
   Swal.fire({
     imageUrl: imageUrl,
     imageHeight: 200,
-    // icon: "success",
     title: `Your GPA is ${gpa}`,
     html: message,
-    confirmButtonText: "Copy GPA to Clipboard",
+    confirmButtonText: "Copy GPA",
   }).then((result) => {
     if (result.isConfirmed) {
-      const textarea = document.createElement("textarea");
-      textarea.value = gpa;
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand("copy");
-      document.body.removeChild(textarea);
-      Swal.fire({
-        icon: "success",
-        title: "GPA copied to Clipboard",
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      copyGPA(gpa);
     }
   });
 }
@@ -64,4 +51,24 @@ export function reset() {
   courses = [];
   updateTable();
   return courses;
+}
+
+async function copyGPA(gpa) {
+  try {
+    // Use the Clipboard API to write the text to the clipboard
+    await navigator.clipboard.writeText(gpa);
+    Swal.fire({
+      icon: "success",
+      title: "GPA copied to Clipboard",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops! Unable to copy GPA to Clipboard,",
+      text: `Please try again or manually copy the GPA value. If the issue persists, ensure that your browser supports the Clipboard API and that you have granted necessary permissions. Error: ${error}`,
+      showConfirmButton: false,
+    });
+  }
 }
