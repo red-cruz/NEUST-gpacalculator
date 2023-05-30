@@ -38,6 +38,11 @@ $(function () {
   // hide course count
   $("#courseCount").hide();
 
+  // change theme
+  const theme = localStorage.getItem("theme") || "dark";
+  if (theme === "light")
+    $("#theme-switch-toggle").prop("checked", true).trigger("change");
+
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
   const forms = document.querySelectorAll(".needs-validation");
 
